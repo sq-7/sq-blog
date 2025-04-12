@@ -1,5 +1,4 @@
 ---
-author: Sat Naing
 pubDatetime: 2024-01-04T09:30:41.816Z
 title: AstroPaper 4.0
 slug: "astro-paper-v4"
@@ -32,7 +31,7 @@ The `postSlug` in the blog content schema is no longer available in AstroPaper v
 
 ```bash
 ---
-author: Sat Naing
+author: SQ
 pubDatetime: 2024-01-01T04:35:33.428Z
 title: AstroPaper 4.0
 slug: "astro-paper-v4" # if slug is not specified, it will be 'astro-paper-4' (file name).
@@ -120,5 +119,5 @@ We believe these updates will significantly elevate your AstroPaper experience. 
 
 Happy Blogging!
 
-[Sat Naing](https://satnaing.dev) <br/>
+[SQ](https://satnaing.dev) <br/>
 Creator of AstroPaper
