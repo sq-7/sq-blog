@@ -1,0 +1,29 @@
+---
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import Layout from "@/layouts/Layout.astro";
+---
+
+<Layout title="About">
+    <Header />
+    <Breadcrumb />
+    <main id="main-content">
+        <section id="about" class="prose mb-28 max-w-3xl prose-img:border-0">
+            <h1 class="text-2xl tracking-wider sm:text-3xl">About</h1>
+            <p>Hi, I'm SQ 👋</p>
+            <p>Welcome to my digital garden where I cultivate thoughts and nurture passions.</p>
+
+            <h2>✍️ Why I Write</h2>
+            <ul>
+                <li>Building a personal knowledge base</li>
+                <li>Documenting life's milestones through the written word</li>
+                <li>Connecting with curious minds through shared discoveries</li>
+            </ul>
+
+            <h2>💌 Fine me</h2>
+            <p>Email：<a href="mailto:charleshuang0416@gmail.com">charleshuang0416@gmail.com</a></p>
+        </section>
+    </main>
+    <Footer />
+</Layout>
