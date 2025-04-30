@@ -98,4 +98,4 @@ If you enjoy this theme, please consider starring the repo. You can also support
 
 Enjoy!
 
-[Sat Naing](https://satnaing.dev/)
+[SQ](https://satnaing.dev/)
