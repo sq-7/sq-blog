@@ -1,7 +1,7 @@
 ---
 pubDatetime: 2022-09-23T15:22:00Z
 modDatetime: 2025-03-22T06:25:46.734Z
-title: How to Fix Blurry HTML5 Canvas on High-Density Screens
+title: How to Fix Blurry Canvas on High-Density Screens
 slug: blurry-canvas
 featured: false
 draft: false

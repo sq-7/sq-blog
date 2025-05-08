@@ -2,7 +2,7 @@ export const SITE = {
   website: "https://sqblog.vercel.app/", // replace this with your deployed domain
   author: "SQ",
   profile: "https://sqblog.vercel.app/about",
-  desc: "A minimal, responsive and SEO-friendly Astro blog theme.",
+  desc: "Share tutorials, code optimization tips, and hands-on project experience in Java/Web development, algorithms, and related fields.",
   title: "SQ Blog",
   ogImage: "astropaper-og.jpg",
   lightAndDarkMode: true,
