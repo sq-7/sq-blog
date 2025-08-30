@@ -16,21 +16,20 @@ description:
 # Maintain aspect ratio: Mathematical principles and implementation of image scaling algorithms
 
 In web and application development, we often need to fit content of different sizes(such as image, video or pdf) into fixed size container.
+We will talk about this in the following content.
 
-在网页和应用开发中，我们经常需要将不同尺寸的内容（如图片、视频或PDF页面）适配到固定大小的容器中。这就需要一个既能保持原始内容比例，又能最大化利用空间的缩放算法。今天，我们将深入探讨这个看似简单却至关重要的算法原理。
+## Problem
 
-## 问题引入
+Image the scenario: you want to display various sizes in an 800 x 600 pixel container. Some images are 100 x 500, some are 500 x 1000. 
 
-想象一下这个场景：你正在开发一个图片浏览器，需要在一个 800×600 像素的容器中显示各种不同尺寸的图片。有些图片是横向的(1000×500)，有些是纵向的(500×1000)，还有些是正方形的(800×800)。
+Here's the question：
+- How to ensure that image can be fully displayed in the container without cropping?
+- How to maintain the aspect ratio of image?
+- How to display the image as large as possible?
 
-问题来了：
-- 如何确保图片完全显示在容器内（不裁剪）？
-- 如何避免图片变形（保持原始宽高比）？
-- 如何最大化利用容器空间（图片尽可能大）？
+## Solution
 
-## "Fit"缩放算法的核心
-
-这个问题的解决方案是一个简单而优雅的算法，只需几行代码：
+The solution to the problem is simple.
 
 ```javascript
 let fitScale;
@@ -41,54 +40,51 @@ if (pageWidth / pageHeight > containerWidth / containerHeight) {
 }
 ```
 
-这短短几行代码蕴含着深刻的数学原理，让我们逐步分析。
+## Analysis
 
-## 数学原理解析
+### Aspect Ratio
 
-### 宽高比(Aspect Ratio)
+Firstly, we need to know: aspect ratio = width / height. The larger the value, the wider the shape; The smaller the value,
+the higher the shape.
 
-首先，我们需要了解两个关键的宽高比：
-- **内容宽高比** = 内容宽度 / 内容高度
-- **容器宽高比** = 容器宽度 / 容器高度
+For example:
+- 16:9, aspect ratio approximately 1.78
+- 4:3, aspect ratio approximately 1.33
+- 1:1, aspect ratio approximately 1.0
 
-宽高比是形状的关键特征。值越大，表示形状越"宽"；值越小，表示形状越"高"。例如：
-- 16:9的屏幕，宽高比约为1.78
-- 4:3的屏幕，宽高比约为1.33
-- 1:1的正方形，宽高比为1.0
+### Scale Factor
 
-### 缩放因子(Scale Factor)
+We can calculate two possible scaling factors:
+- Width scaling factor = container width/content width
+- Height scaling factor = container height/content height
 
-我们可以计算两种可能的缩放因子：
-- **宽度缩放因子** = 容器宽度 / 内容宽度
-- **高度缩放因子** = 容器高度 / 内容高度
+These two scaling factors represent:
+-If we only considering the width, the scaling multiple of the content
+-If we only considering the height, the scaling multiple of the content
 
-这两个缩放因子分别表示：
-- 如果只考虑宽度，内容需要缩放的倍数
-- 如果只考虑高度，内容需要缩放的倍数
+### Judgement
 
-### 算法的关键决策
-
-算法的核心是一个简单但精妙的判断：
+The key is a simple judgement:
 
 ```javascript
 if (pageWidth / pageHeight > containerWidth / containerHeight)
 ```
 
-这个条件比较内容与容器的宽高比：
-- 当内容的宽高比 > 容器的宽高比时，意味着**内容相对更宽**
-- 当内容的宽高比 ≤ 容器的宽高比时，意味着**内容相对更高**
+This condition compares the aspect ratio of the content with the aspect ratio of the container:
+- When the aspect ratio of the content is greater than that of the container, it means that the content is wider
+- When the aspect ratio of the content is smaller than that of the container, it means that the content is higher
 
-## 图解算法逻辑
+## Example
 
-### 场景1：宽内容适应容器
+### Wide image
 
-假设我们有一个宽为1000px、高为500px的图片（宽高比为2.0），要放入一个800×600的容器（宽高比约为1.33）中：
+Assuming we have an image with 1000px width and 500px height. We want to display it in a 800x600 container.
 
-1. 内容宽高比(2.0) > 容器宽高比(1.33)，说明内容相对更宽
-2. 因此选择宽度缩放因子：`fitScale = 800 / 1000 = 0.8`
-3. 应用缩放后，图片尺寸变为：800px × 400px
+1. Aspect ratio of content (2.0) is bigger than that of the container (1.33), thus the content is wider.
+2. Therefore, fitScale should be `800 / 1000 = 0.8`.
+3. Applying this scale, the size of the image should be 800px x 400px
 
-在这种情况下，图片宽度刚好填满容器，上下会有空白（图片高度只有400px，而容器高600px）。
+在这种情况下，图片宽度刚好填满容器，上下会有空白（图片高度只有400px，而容器高600px）。 
 
 ### 场景2：高内容适应容器
 
