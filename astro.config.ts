@@ -37,4 +37,8 @@ export default defineConfig({
     responsiveImages: true,
     preserveScriptOrder: true,
   },
+  i18n: {
+    locales: ['en', 'zh'],
+    defaultLocale: 'en'
+  }
 });

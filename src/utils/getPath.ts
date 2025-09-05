@@ -13,6 +13,9 @@ export function getPath(
   filePath: string | undefined,
   includeBase = true
 ) {
+  const isZHCN = filePath?.startsWith('src/data/blog/zh')
+  filePath = filePath?.replace('src/data/blog/zh-cn', 'src/data/blog')?.replace('src/data/blog/en', 'src/data/blog');
+
   const pathSegments = filePath
     ?.replace(BLOG_PATH, "")
     .split("/")
@@ -21,7 +24,8 @@ export function getPath(
     .slice(0, -1) // remove the last segment_ file name_ since it's unnecessary
     .map(segment => slugifyStr(segment)); // slugify each segment path
 
-  const basePath = includeBase ? "/posts" : "";
+
+  const basePath = includeBase ? (isZHCN ? "/zh/posts" : "/posts") : ("");
 
   // Making sure `id` does not contain the directory
   const blogId = id.split("/");
