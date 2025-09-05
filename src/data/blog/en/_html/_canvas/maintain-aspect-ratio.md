@@ -84,39 +84,39 @@ Assuming we have an image with 1000px width and 500px height. We want to display
 2. Therefore, fitScale should be `800 / 1000 = 0.8`.
 3. Applying this scale, the size of the image should be 800px x 400px
 
-在这种情况下，图片宽度刚好填满容器，上下会有空白（图片高度只有400px，而容器高600px）。 
+In this case, the image width exactly fills the container, and there will be blank space above and below (the image height is only 400px, while the container height is 600px).
 
-### 场景2：高内容适应容器
+### Scenario 2: Tall content fitting the container
 
-现在假设我们有一个宽为500px、高为1000px的图片（宽高比为0.5），放入同样的800×600容器：
+Now suppose we have an image with a width of 500px and a height of 1000px (aspect ratio of 0.5), placed in the same 800×600 container:
 
-1. 内容宽高比(0.5) < 容器宽高比(1.33)，说明内容相对更高
-2. 因此选择高度缩放因子：`fitScale = 600 / 1000 = 0.6`
-3. 应用缩放后，图片尺寸变为：300px × 600px
+1. Content aspect ratio (0.5) < container aspect ratio (1.33), indicating the content is relatively taller
+2. Therefore, choose the height scaling factor: `fitScale = 600 / 1000 = 0.6`
+3. After applying the scaling, the image size becomes: 300px × 600px
 
-在这种情况下，图片高度刚好填满容器，左右会有空白（图片宽度只有300px，而容器宽800px）。
+In this case, the image height exactly fills the container, and there will be blank space on the left and right (the image width is only 300px, while the container width is 800px).
 
-## 为什么这个算法总是有效？
+## Why does this algorithm always work?
 
-这个算法之所以有效，是因为它总是选择**较小的缩放因子**。这确保了：
+This algorithm works because it always selects the **smaller scaling factor**. This ensures:
 
-1. **内容完全可见**：选择较小的缩放因子，确保内容的任何部分都不会超出容器
-2. **保持宽高比**：同时按相同比例缩放宽度和高度，维持原始形状
-3. **最大化利用空间**：在满足上述两个条件的前提下，尽可能让内容填充容器
+1. **Content is fully visible**: By choosing the smaller scaling factor, we ensure that no part of the content will exceed the container
+2. **Maintain aspect ratio**: Scaling both width and height by the same proportion maintains the original shape
+3. **Maximize space utilization**: Under the premise of meeting the above two conditions, try to fill the container with content as much as possible
 
-## 实际应用场景
+## Practical application scenarios
 
-这个简单的算法在各种应用中被广泛使用：
+This simple algorithm is widely used in various applications:
 
-- **图片浏览器**：显示不同尺寸的图片
-- **PDF阅读器**：适配不同纸张大小的页面
-- **视频播放器**：处理不同宽高比的视频
-- **响应式设计**：调整UI元素以适应不同屏幕尺寸
-- **打印预览**：显示如何在纸张上布局内容
+- **Image browsers**: Display images of different sizes
+- **PDF readers**: Adapt pages of different paper sizes
+- **Video players**: Handle videos with different aspect ratios
+- **Responsive design**: Adjust UI elements to fit different screen sizes
+- **Print preview**: Show how content is laid out on paper
 
-## 代码实现示例
+## Code implementation example
 
-让我们扩展一下最初的例子，提供一个完整的缩放实现：
+Let's extend the original example to provide a complete scaling implementation:
 
 ```javascript
 function fitContentToContainer(content, container) {
@@ -126,18 +126,18 @@ function fitContentToContainer(content, container) {
     let scale, newWidth, newHeight;
     
     if (contentRatio > containerRatio) {
-        // 内容较宽，以容器宽度为基准
+        // Content is wider, use container width as the base
         scale = container.width / content.width;
         newWidth = container.width;
         newHeight = content.height * scale;
     } else {
-        // 内容较高，以容器高度为基准
+        // Content is taller, use container height as the base
         scale = container.height / content.height;
         newHeight = container.height;
         newWidth = content.width * scale;
     }
     
-    // 计算内容在容器中的居中位置
+    // Calculate the centered position of content in the container
     const left = (container.width - newWidth) / 2;
     const top = (container.height - newHeight) / 2;
     
@@ -150,19 +150,19 @@ function fitContentToContainer(content, container) {
     };
 }
 
-// 使用示例
+// Usage example
 const result = fitContentToContainer(
-    { width: 1000, height: 500 },  // 内容尺寸
-    { width: 800, height: 600 }    // 容器尺寸
+    { width: 1000, height: 500 },  // Content dimensions
+    { width: 800, height: 600 }    // Container dimensions
 );
 
 console.log(result);
-// 输出: { width: 800, height: 400, left: 0, top: 100, scale: 0.8 }
+// Output: { width: 800, height: 400, left: 0, top: 100, scale: 0.8 }
 ```
 
-## 算法变体：Fill模式
+## Algorithm variant: Fill mode
 
-我们讨论的是"Fit"模式，确保内容完全显示。另一种常见变体是"Fill"模式，它确保容器完全填满，可能会裁剪内容的一部分：
+We discussed the "Fit" mode, which ensures the content is fully displayed. Another common variant is the "Fill" mode, which ensures the container is completely filled, potentially cropping part of the content:
 
 ```javascript
 function fillContainerWithContent(content, container) {
@@ -172,18 +172,18 @@ function fillContainerWithContent(content, container) {
     let scale, newWidth, newHeight;
     
     if (contentRatio > containerRatio) {
-        // 内容较宽，以容器高度为基准
+        // Content is wider, use container height as the base
         scale = container.height / content.height;
         newHeight = container.height;
         newWidth = content.width * scale;
     } else {
-        // 内容较高，以容器宽度为基准
+        // Content is taller, use container width as the base
         scale = container.width / content.width;
         newWidth = container.width;
         newHeight = content.height * scale;
     }
     
-    // 计算内容在容器中的居中位置
+    // Calculate the centered position of content in the container
     const left = (container.width - newWidth) / 2;
     const top = (container.height - newHeight) / 2;
     
@@ -197,10 +197,10 @@ function fillContainerWithContent(content, container) {
 }
 ```
 
-注意"Fill"模式与"Fit"模式的条件判断正好相反。
+Note that the condition judgment in "Fill" mode is exactly the opposite of "Fit" mode.
 
-## 总结
+## Summary
 
-这个看似简单的缩放算法隐藏着优雅的数学原理。通过比较内容和容器的宽高比，我们可以智能地决定以宽度还是高度为基准进行缩放，从而实现内容在保持原始比例的同时最大化利用容器空间。
+This seemingly simple scaling algorithm hides elegant mathematical principles. By comparing the aspect ratios of content and container, we can intelligently decide whether to scale based on width or height, thereby achieving maximum utilization of container space while maintaining the original proportions of the content.
 
 

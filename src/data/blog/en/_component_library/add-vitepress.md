@@ -1,7 +1,7 @@
 ---
 pubDatetime: 2022-09-24T15:22:00Z
 modDatetime: 2025-03-25T06:25:46.734Z
-title: 组件库添加VitePress
+title: Adding VitePress to Component Library
 slug: add-vitepress
 featured: false
 draft: true
@@ -14,19 +14,19 @@ description:
 
 ## Install
 
-run `pnpm add -D vitepress` and `pnpm vitepress init`
+Run `pnpm add -D vitepress` and `pnpm vitepress init`
 
-Vitepress 会把 docs 文件夹下的markdown文件按路径自动转为html文件。
+Vitepress will automatically convert markdown files in the docs folder to HTML files by path.
 
-## custom theme
+## Custom Theme
 
-check official document.
+Check official document.
 
-## add custom content on default layout
+## Add Custom Content on Default Layout
 
-change `vite.resolve.alias` in `/docs/.vitepress/config.mts` to overwrite default component.
+Change `vite.resolve.alias` in `/docs/.vitepress/config.mts` to overwrite default component.
 
-example:
+Example:
 ```typescript
 export default defineConfig({
     vite: {

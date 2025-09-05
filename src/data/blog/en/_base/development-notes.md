@@ -1,192 +1,190 @@
 ---
 pubDatetime: 2022-09-23T15:22:00Z
 modDatetime: 2025-03-22T06:25:46.734Z
-title: 开发笔记
-slug: note
+title: Development Notes
+slug: development-notes
 featured: false
 draft: false
 tags:
   - note
 description:
-  文章记录开发过程中遇到的问题及其解决方法，和不清楚的知识点。
+  This article records problems encountered during the development process, their solutions, and unclear knowledge points.
 ---
 
-## git 命令
+## Git Commands
 
 ### git log
-获取所有提交记录，按行输出。
+Get all commit records, output by line.
 
-#### --pretty 参数
-设置输出格式，如：`--pretty=format:%s %h` 参数，其中 %s 指主题，%h 指提交的哈希缩写，所以输出格式会被设置为：`主题 git提交的哈希缩写`。
+#### --pretty parameter
+Set the output format, such as: `--pretty=format:%s %h` parameter, where %s refers to the subject, %h refers to the abbreviated commit hash, so the output format will be set to: `subject abbreviated git commit hash`.
 
-#### 设置输出范围
+#### Setting output range
 
-git log 命令后跟 `"$previous_tag".."$current_tag"` 将会输出从 `previous_tag` 变量(不包括)所代表的 git 提交 tag 到 `current_tag` 的提交记录。
+After the git log command followed by `"$previous_tag".."$current_tag"` will output commit records from the git commit tag represented by the `previous_tag` variable (excluding) to `current_tag`.
 
 ### git rev-parse
-这个底层命令主要用于解析git 引用为哈希值。
+This low-level command is mainly used to resolve git references to hash values.
 
 #### --abbrev-ref HEAD
---abbrev-ref 修饰符让 rev-parse 输出被解析的引用的缩写名称。HEAD 通常指向当前所在分支。
+The --abbrev-ref modifier makes rev-parse output the abbreviated name of the resolved reference. HEAD usually points to the current branch.
 
-最终输出的是当前分支的缩写名称。
+The final output is the abbreviated name of the current branch.
 
 ### git fetch
-从远程仓库获取最新提交、分支等数据，但不合并或修改当前代码。运行后可以使用 git log origin/分支名 来查看最新更新。
+Fetch the latest commits, branches and other data from the remote repository, but do not merge or modify the current code. After running, you can use git log origin/branch-name to view the latest updates.
 
 #### --prune
-更新时清理远程仓库中已不存在而本地存在的分支。
+Clean up branches that exist locally but no longer exist in the remote repository during update.
 
 ### git pull
-从远程仓库获取更新并合并到当前分支。等于运行了 git fetch + git merge origin/当前分支名
+Fetch updates from the remote repository and merge them into the current branch. Equivalent to running git fetch + git merge origin/current-branch-name
 
 ### git tag
-列出所有标签。后面跟形如 v1.0.0 的修饰符的话就会创建标签。
+List all tags. When followed by a modifier like v1.0.0, it will create a tag.
 
 #### --sort
-git tag 排序修饰符。
+Git tag sorting modifier.
 
-如 `--sort=-version:refname`按版本号倒序显示标签，其中 `-` 表示倒序，`version:` 前缀让 git 把标签名理解为版本号而不是普通字符串，
-`refname` 指标签的名字本身。
+For example, `--sort=-version:refname` displays tags in reverse order by version number, where `-` means reverse order, the `version:` prefix makes git understand the tag name as a version number rather than a regular string, and `refname` refers to the tag name itself.
 
-## 计算机基础
+## Computer Basics
 
-### 二进制
-1 byte = 8 bits。bit 是二进制最小单位。UTF-8编码会把一个 unicode 字符转换成若干个8位字节。
+### Binary
+1 byte = 8 bits. Bit is the smallest unit of binary. UTF-8 encoding converts a Unicode character into several 8-bit bytes.
 
-### 十六进制
-1个十六进制数 = 4位二进制。两个十六进制数即可表示一个字节（8位）。
+### Hexadecimal
+1 hexadecimal digit = 4 binary digits. Two hexadecimal digits can represent one byte (8 bits).
 
-js 中的十六进制表现方式有：
-- 0x。十六进制数值的标准表示
-- %。URL编码。
-- \x。表示一个字节。（latin1范围，0-255）
-- \u。表示一个unicode code unit。（两个字节）
+Hexadecimal representation in js includes:
+- 0x. Standard representation of hexadecimal values
+- %. URL encoding.
+- \x. Represents a byte. (latin1 range, 0-255)
+- \u. Represents a Unicode code unit. (two bytes)
 
 ### UTF-16
-UTF-16编码中，最小的数据单位固定就是 16位。有些 unicode 需要2个 code unit 才能完整表示。
+In UTF-16 encoding, the minimum data unit is fixed at 16 bits. Some Unicode characters require 2 code units to be fully represented.
 
-JS 引擎内部始终使用 UTF-16 存储所有字符串。字符串由一系列16位的 code unit 组成。
+JS engines internally always use UTF-16 to store all strings. Strings consist of a series of 16-bit code units.
 
-## JavaScript 中的二进制
+## Binary in JavaScript
 
-### << 操作符
-`<<` 左移操作符，将数字左移指定位数。左移后右侧补0，相当于数值乘以2的移动位数的次方。
+### << Operator
+`<<` Left shift operator, shifts a number left by the specified number of bits. After left shifting, zeros are padded on the right, which is equivalent to multiplying the value by 2 to the power of the number of shifted bits.
 
-### >>> 操作符
-`>>>` 无符号右移操作符。
+### >>> Operator
+`>>>` Unsigned right shift operator.
 
-### 掩码
-`|` 操作符对两个数的每一位进行比较, 只要有一个为1，结果位就是1，所以用来给二进制数赋值很方便。
+### Mask
+`|` The operator compares each bit of two numbers, and if at least one is 1, the result bit is 1, so it's convenient for assigning values to binary numbers.
 
-`&` 只有在两个操作数对应的二进制位都为1时，结果位才为1, 所以用来取值很方便。
+`&` The result bit is 1 only when both corresponding binary bits of the two operands are 1, so it's convenient for extracting values.
 
-例如:
+For example:
 ```
 let a = (num >>> 12) & 63
 ```
 
-63 用二进制表示是 00111111，所以 a 的值是 num 变量的最右边6位二进制。
+63 in binary is 00111111, so the value of a is the rightmost 6 binary bits of the num variable.
 
 ### Uint8Array
-`Uint8Array` 表示 8 位无符号整型数组，用于存储二进制数据。数组的长度就是总字节长度。
+`Uint8Array` represents an 8-bit unsigned integer array, used to store binary data. The length of the array is the total byte length.
 
 ### btoa
-`btoa` 将二进制/ latin1 编码的字符串转为 base64 编码的 ASCII 字符串。
+`btoa` converts binary/latin1 encoded strings to base64 encoded ASCII strings.
 
-除了 latin1 编码的字符，其他类型的字符会先转为 utf-8 后再进行编码。
+Characters other than latin1 encoded characters will first be converted to utf-8 before encoding.
 
 ### encodeURI
-`encodeURI` 不会对 URI 中的 ASCII 字母、数字、标点符号进行编码： - _ . ! ~ * ' ( ) ，其他都会被编码。
-但对以下在 URI 中具有特殊含义的 ASCII 标点符号，encodeURI() 函数是不会进行转义的：;/?:@&=+$,#
+`encodeURI` does not encode ASCII letters, numbers, and punctuation marks in URIs: - _ . ! ~ * ' ( ), others will be encoded.
+However, for the following ASCII punctuation marks that have special meanings in URIs, the encodeURI() function will not escape them: ;/?:@&=+$,#
 
 ### encodeURIComponent
-`encodeURIComponent` 不会对 ASCII 部分字符进行编码，包括标点符号 - _ . ! ~ * ' ( ) ，大小写字母，数字，其他都会被编码。
+`encodeURIComponent` does not encode ASCII characters, including punctuation marks - _ . ! ~ * ' ( ), upper and lower case letters, numbers, others will be encoded.
 
-两个方法都是先把字符转成utf-8编码的单字节序列，而每个字节可以用两个十六进制字符来表示，再在每个字节（2个十六进制位）前加一个`%`。
+Both methods first convert characters to utf-8 encoded single-byte sequences, and each byte can be represented by two hexadecimal characters, then add a `%` before each byte (2 hexadecimal digits).
 
-> 例如，汉字 “你” 的 Unicode 是 U+4F60，它的 UTF-8 编码是 0xE4 0xBD 0xA0（三个字节）。
-> 0xE4 = 二进制 11100100，1110 = E   0100 = 4，十六进制字符：E4，然后 URL 编码格式就是：%E4
-> 每个字节都可以写成 %E4、%BD、%A0，这就是 URL 编码的样子。
+> For example, the Chinese character "你" has Unicode U+4F60, its UTF-8 encoding is 0xE4 0xBD 0xA0 (three bytes).
+> 0xE4 = binary 11100100, 1110 = E   0100 = 4, hexadecimal character: E4, then the URL encoding format is: %E4
+> Each byte can be written as %E4, %BD, %A0, which is what URL encoding looks like.
 
 ### escape
-将字符串中的特殊字符转为十六进制表示(%/%u+xx)，对于小于255范围内的字符和 encodeURIComponent 表现一致，对于大于255的 输出 %uXXX，保留了
-整个四位十六进制的码点。
+Converts special characters in a string to hexadecimal representation (%/%u+xx). For characters within the range less than 255, it behaves consistently with encodeURIComponent. For characters greater than 255, it outputs %uXXX, preserving the entire four-digit hexadecimal code point.
 
-不编码的ASCII字符：大小写字母、数字和标点符号 - _ . * @ + /
+Unencoded ASCII characters: upper and lower case letters, numbers, and punctuation marks - _ . * @ + /
 
-ASCII 字符（0-255）： 转换为 %XX 格式（XX 是十六进制值）。
+ASCII characters (0-255): Converted to %XX format (XX is the hexadecimal value).
 
-Unicode 字符（> 255）： 转换为 %uXXXX 格式（XXXX 是 4 位十六进制 Unicode 码点）。
+Unicode characters (> 255): Converted to %uXXXX format (XXXX is a 4-digit hexadecimal Unicode code point).
 
 ### unescape
-将 %/%u 开头的十六进制字符解码成码点位0xXX/0xXXXX（latin1范围内的单字节）。并不关心是不是 `escape` 不编码的ASCII字符。
+Decodes hexadecimal characters starting with %/%u into code point bits 0xXX/0xXXXX (single-byte within latin1 range). It doesn't care whether the characters are ASCII characters that `escape` doesn't encode.
 
-所以即使 escape 不编码 `@ + /` ，被 encodeURIComponent 处理后的 `@ + /` 还是会被 unescape 解码。
+So even though escape doesn't encode `@ + /`, `@ + /` processed by encodeURIComponent will still be decoded by unescape.
 
 ### String.fromCharCode
-JavaScript 的字符串底层是由一系列 16 位的 code unit（数值 0–65535）组成。
+JavaScript strings are composed of a series of 16-bit code units (values 0–65535) at the底层.
 
-String.fromCharCode(n) 会创建一个包含单个 code unit 值为 n 的字符串。
+String.fromCharCode(n) creates a string containing a single code unit with value n.
 
 ### String.charCodeAt
-`String.charCodeAt` 返回字符的 unicode 码点。
+`String.charCodeAt` returns the Unicode code point of a character.
 
-## shell
+## Shell
 
 ### $
-`$` + 变量名可以引用变量。
+`$` + variable name can reference variables.
 
 ### grep
-`grep`，文本搜索命令
+`grep`, text search command
 
-`-E` 修饰符表示使用正则、无匹配文本就返回 `1`。
+`-E` modifier indicates using regex, returns `1` when no matching text is found.
 
 ### |
-`|` 将左侧的输出传递给右侧作为输入。
+`|` passes the output from the left side as input to the right side.
 
 ### ||
-如果操作符左侧退出码为0，就跳过右侧命令的执行，否则的话就执行右侧命令。
+If the exit code of the left side of the operator is 0, execution of the right side command is skipped; otherwise, the right side command is executed.
 
 ### $()
-`$()` 会运行括号内的命令并将输出作为结果参与接下来的命令运算中。 
+`$()` will run the command inside the parentheses and use the output as the result to participate in subsequent command operations.
 
 ### echo
-`echo`，打印命令，将文本或变量内容显示到标准输出设备。
+`echo`, print command, displays text or variable content to the standard output device.
 
-`echo -e` 用于启用
+`echo -e` is used to enable
 
 #### in github actions
-在 github actions 中，`::` 是用于和github actions 通信的特殊指令，被识别到时 echo 后的文本就会被认为是指令而不是普通文本。
+In github actions, `::` is a special instruction for communicating with github actions. When recognized, the text after echo will be treated as an instruction rather than ordinary text.
 
-`::set-output name=变量名::变量值` 就能为 job 定义变量，后续通过 `${{steps.step的id.outputs.变量名}}` 来引用变量。
+`::set-output name=variable-name::variable-value` can define variables for the job, which can be referenced later through `${{steps.step-id.outputs.variable-name}}`.
 
 ### true
-`true` 会返回退出码 0。
+`true` returns exit code 0.
 
 ### @
-`${array[@]}` 会将数组所有元素展开。
+`${array[@]}` expands all elements of the array.
 
 ### set -e
-一般 shell 脚本运行时会忽略非 0 退出码。而有了 `set -e`，如果出现非 0 退出码脚本就会立即停止执行。
+Normally, shell scripts ignore non-zero exit codes during execution. With `set -e`, if a non-zero exit code appears, the script will stop executing immediately.
 
-### 条件判断
-`if ... ; then`，如果 if 后面条件成立就会运行 then 后面的命令。
+### Conditional judgment
+`if ... ; then`, if the condition after if is true, the commands after then will be executed.
 
-`for (变量名) in (列表类型的变量名); do` 会循环列表并运行循环体代码。`done` 用于标识循环的结束， `fi` 标识 if 判断的结束。
+`for (variable-name) in (list-type-variable-name); do` will loop through the list and execute the loop body code. `done` marks the end of the loop, and `fi` marks the end of the if judgment.
 
 ### [[]]
-`[[]]` 用于条件判断， 例如 `[["$message"]]` 判断变量长度非零，则为真，和 `[[ -n "$message" ]]` 作用一样。
+`[[]]` is used for conditional judgment, for example `[["$message"]]` judges that the variable length is non-zero, which is true, and has the same effect as `[[ -n "$message" ]]`.
 
 ### \>
-`>` 用于重写文件，后面跟文件名。
+`>` is used to overwrite files, followed by a filename.
 
 ### cat
-`cat` 读取文件内容并输出在命令行。
+`cat` reads file content and outputs it to the command line.
 
-## node
+## Node
 
-### __dirname 和 process.cwd
+### __dirname and process.cwd
 
 ```
 - ui
@@ -194,7 +192,7 @@ String.fromCharCode(n) 会创建一个包含单个 code unit 值为 n 的字符�
     - test.ts
 ```
 
-此时 test.ts 内代码运行结果：
+At this time, the code execution result in test.ts:
 
 ```typescript
 process.cwd() // D:\code\ui

@@ -1,7 +1,7 @@
 ---
 pubDatetime: 2022-09-23T15:22:00Z
 modDatetime: 2025-03-22T06:25:46.734Z
-title: Javascript实现Base64编码
+title: JavaScript Implementation of Base64 Encoding
 slug: jsbase64
 featured: true
 draft: true
@@ -16,9 +16,9 @@ description:
 Base64 includes A-Z, a-z, 0-9, +, /
 
 ## core
-Base64 将3字节（24位）的二进制数据转换为6位一组的片段，每个6位片段作为索引映射到64个可打印字符之一。上述字符正是这64个字符的完整集合。
+Base64 converts 3 bytes (24 bits) of binary data into 6-bit segments, with each 6-bit segment mapped as an index to one of 64 printable characters. The aforementioned characters are exactly the complete set of these 64 characters.
 
-> 字节不足时用 = 填充
+> When bytes are insufficient, pad with =
 
 ## implementation
 

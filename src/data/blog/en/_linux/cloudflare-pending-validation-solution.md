@@ -1,20 +1,20 @@
 ---
 pubDatetime: 2021-09-23T15:22:00Z
 modDatetime: 2021-09-23T15:22:00Z
-title: 解决 cloudflare 中的 edge certificate 显示待验证的问题
+title: Solution for edge certificate pending validation issue in Cloudflare
 slug: cloudflare-pending-validation-solution
 featured: true
 draft: false
 tags:
   - cloudflare
 description:
-  解决 cloudflare 中的 edge certificate 显示待验证的问题
+  Solution for edge certificate pending validation issue in Cloudflare
 ---
 
-## edge certificate 显示待验证的解决方法
+## Solution for edge certificate pending validation
 
-1、在 cloudflare 的控制面板中找到 DNS 的设置，里面有个 DNSSEC，开启。需要你到域名的注册商那里增加一个对应记录。
+1. Find the DNS settings in the Cloudflare control panel, there is a DNSSEC option, enable it. You need to add a corresponding record at your domain registrar.
 
-2、找到 DNS-Records，找到里面的 DNS 记录，点编辑，把代理状态关闭后保存，再重新开启。
+2. Find DNS-Records, locate the DNS records, click edit, turn off the proxy status and save, then re-enable it.
 
-3、找到 SSL/TLS 下的 edge certificates 页面，底部有一个 Disable Universal SSL，禁用后再重新开启。
+3. Find the edge certificates page under SSL/TLS, there is a Disable Universal SSL at the bottom, disable it and then re-enable it.
