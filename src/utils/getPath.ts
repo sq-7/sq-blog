@@ -1,4 +1,4 @@
-import { BLOG_PATH } from "@/content.config";
+import { EN_BLOG_PATH, ZH_BLOG_PATH } from "@/content.config";
 import { slugifyStr } from "./slugify";
 
 /**
@@ -14,10 +14,12 @@ export function getPath(
   includeBase = true
 ) {
   const isZHCN = filePath?.startsWith('src/data/blog/zh')
-  filePath = filePath?.replace('src/data/blog/zh-cn', 'src/data/blog')?.replace('src/data/blog/en', 'src/data/blog');
+
+  // Determine which base path to use for replacement
+  const contentBasePath = isZHCN ? ZH_BLOG_PATH : EN_BLOG_PATH;
 
   const pathSegments = filePath
-    ?.replace(BLOG_PATH, "")
+    ?.replace(contentBasePath, "")
     .split("/")
     .filter(path => path !== "") // remove empty string in the segments ["", "other-path"] <- empty string will be removed
     .filter(path => !path.startsWith("_")) // exclude directories start with underscore "_"
@@ -25,7 +27,7 @@ export function getPath(
     .map(segment => slugifyStr(segment)); // slugify each segment path
 
 
-  const basePath = includeBase ? (isZHCN ? "/zh/posts" : "/posts") : ("");
+  const urlBasePath = includeBase ? (isZHCN ? "/zh/posts" : "/posts") : ("");
 
   // Making sure `id` does not contain the directory
   const blogId = id.split("/");
@@ -33,8 +35,8 @@ export function getPath(
 
   // If not inside the sub-dir, simply return the file path
   if (!pathSegments || pathSegments.length < 1) {
-    return [basePath, slug].join("/");
+    return [urlBasePath, slug].join("/");
   }
 
-  return [basePath, ...pathSegments, slug].join("/");
+  return [urlBasePath, ...pathSegments, slug].join("/");
 }
