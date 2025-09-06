@@ -4,7 +4,7 @@ const languages = [
     { code: "zh", name: "Chinese", nativeName: "中文" },
 ]
 const { currentLocale } = Astro
-const currentLanguageName = languages.find(m => m.code === currentLocale).nativeName
+const currentLanguageName = languages.find(m => m.code === currentLocale)!.nativeName
 ---
 
 <div class="relative language-switcher">
@@ -54,7 +54,7 @@ const currentLanguageName = languages.find(m => m.code === currentLocale).native
     </div>
 </div>
 
-<script define:vars={{currentLocale}}>
+<script is:inline define:vars={{currentLocale}}>
     const languages = {
         en: { nativeName: "English", path: "/" },
         zh: { nativeName: "中文", path: "/zh" },

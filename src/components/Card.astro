@@ -1,12 +1,12 @@
 ---
 import { slugifyStr } from "@/utils/slugify";
-import type { CollectionEntry } from "astro:content";
 import { getPath } from "@/utils/getPath";
 import Datetime from "./Datetime.astro";
+import type { BlogCollectionEntry } from "../types";
 
-export interface Props extends CollectionEntry<"zhBlog" | "enBlog"> {
-  variant?: "h2" | "h3";
-}
+type PropsType = { variant?: "h2" | "h3"; } & BlogCollectionEntry
+
+export type Props = PropsType
 
 const { variant = "h2", data, id, filePath } = Astro.props;
 
