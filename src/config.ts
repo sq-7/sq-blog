@@ -1,7 +1,7 @@
 export const SITE = {
-  website: "https://sqblog.vercel.app/", // replace this with your deployed domain
+  website: "https://ashuqi.com/", // replace this with your deployed domain
   author: "ShuQi",
-  profile: "https://sqblog.vercel.app/about",
+  profile: "https://ashuqi.com.app/about",
   desc: "Share tutorials, code optimization tips, and hands-on project experience in Java/Web development, algorithms, and related fields.",
   title: "ShuQi Blog",
   ogImage: "astropaper-og.jpg",
