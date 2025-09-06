@@ -2,7 +2,6 @@
 import { ClientRouter } from "astro:transitions";
 import { SITE } from "@/config";
 import "@/styles/global.css";
-import Analytics from '@vercel/analytics/astro'
 
 const googleSiteVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
 
@@ -129,10 +128,21 @@ const structuredData = {
     <ClientRouter />
 
     <script is:inline src="/toggle-theme.js"></script>
+    <!-- Google tag (gtag.js) -->
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-3HDZJ5FSEP"></script>
+    <script>
+      // @ts-ignore
+      window.dataLayer = window.dataLayer || [];
+      // @ts-ignore
+      function gtag(){dataLayer.push(arguments);}
+      // @ts-ignore
+      gtag('js', new Date());
+      // @ts-ignore
+      gtag('config', 'G-3HDZJ5FSEP');
+    </script>
   </head>
   <body>
     <slot />
-    <Analytics/>
   </body>
 </html>
 
