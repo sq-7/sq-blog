@@ -128,19 +128,19 @@ const structuredData = {
     <ClientRouter />
 
     <script is:inline src="/toggle-theme.js"></script>
-    <!-- Google tag (gtag.js) -->
-    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-3HDZJ5FSEP"></script>
-    <script>
-      // @ts-ignore
-      window.dataLayer = window.dataLayer || [];
-      // @ts-ignore
-      function gtag(){dataLayer.push(arguments);}
-      // @ts-ignore
-      gtag('js', new Date());
-      // @ts-ignore
-      gtag('config', 'G-3HDZJ5FSEP');
-    </script>
   </head>
+  <!-- Google tag (gtag.js) -->
+  <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-3HDZJ5FSEP"></script>
+  <script>
+    // @ts-ignore
+    window.dataLayer = window.dataLayer || [];
+    // @ts-ignore
+    function gtag(){dataLayer.push(arguments);}
+    // @ts-ignore
+    gtag('js', new Date());
+    // @ts-ignore
+    gtag('config', 'G-3HDZJ5FSEP');
+  </script>
   <body>
     <slot />
   </body>
